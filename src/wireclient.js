@@ -128,14 +128,11 @@
   RS.WireClient = function(rs) {
     this.connected = false;
     /**
-     * Event: change
-     *   never fired for some reason
-     *
      * Event: connected
      *   fired when the wireclient connect method realizes that it is
-     *   in posession of a token and a href
+     *   in possession of a token and a href
      **/
-    RS.eventHandling(this, 'change', 'connected');
+    RS.eventHandling(this, 'connected');
     rs.on('error', function(error){
       if (error instanceof RemoteStorage.Unauthorized) {
         this.configure(undefined, undefined, undefined, null);
