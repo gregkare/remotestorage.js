@@ -269,7 +269,6 @@
    *
    */
   RemoteStorage.prototype.getSyncInterval = function() {
-    console.log("THIS IS",this);
     return this.syncInterval;
   };
   /**
@@ -288,7 +287,7 @@
     this.syncInterval = interval;
     if (this._syncTimer) {
       this.stopSync();
-      if(interval > 0)
+      if(interval >= 0)
         this._syncTimer = setTimeout(this.syncCycle.bind(this), interval);
     }
   };
@@ -362,9 +361,8 @@
     console.log("\n!!!   SyncCycle   !!!\n")
     this.sync().then(function() {
       this.stopSync();
-        this._syncTimer = setTimeout(this.syncCycle.bind(this), this.getSyncInterval());
-      }.bind(this),
-                       function(e) {
+      this._syncTimer = setTimeout(this.syncCycle.bind(this), this.getSyncInterval());
+    }.bind(this), function(e) {
       console.log('sync error, retrying');
       this.stopSync();
       this._syncTimer = setTimeout(this.syncCycle.bind(this), this.getSyncInterval());
