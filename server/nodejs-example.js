@@ -275,8 +275,8 @@ exports.server = (function() {
     writeJson(res, {
       links:[{
         href: config.protocol+'://'+config.host+':'+config.port+'/storage/'+userName,
-        rel: "remoteStorage",
-        type: "https://www.w3.org/community/rww/wiki/read-write-web-00#simple",
+        rel: "remotestorage",
+        type: "draft-dejong-remotestorage-01",
         properties: {
           'auth-method': "https://tools.ietf.org/html/draft-ietf-oauth-v2-26#section-4.2",
           'auth-endpoint': config.protocol+'://'+config.host+':'+config.port+'/auth/'+userName
@@ -375,7 +375,7 @@ exports.server = (function() {
           dataStr+=chunk;
         });
         req.on('end', function(chunk) {
-          var timestamp = new Date().getTime();
+          var timestamp = String(new Date().getTime());
           capt.body = dataStr;
           content[path]=dataStr;
           contentType[path]=req.headers['content-type'];
