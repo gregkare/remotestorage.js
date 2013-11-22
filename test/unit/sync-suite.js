@@ -23,9 +23,9 @@ define(['requirejs', 'fs'], function(requirejs, fs, undefined) {
     tests: [
 
       {
-        desc: "Default value ",
+        desc: "Default value (won't work because we don't run rs_init here)",
         run: function(env, test) {
-          test.assert(env.rs.getSyncInterval(), 10000);
+          test.assertAnd(env.rs.getSyncInterval(), 10000, "syncInterval was "+env.rs.getSyncInterval());
         }
       },
 
