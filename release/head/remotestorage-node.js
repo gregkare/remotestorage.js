@@ -2550,7 +2550,7 @@ Math.uuid = function (len, radix) {
      * (start code)
      * {
      *    path: path,
-     *    origin: incoming ? 'remote' : 'window',
+     *    origin: 'window', 'local', or 'remote'
      *    oldValue: oldBody,
      *    newValue: newBody
      *  }
@@ -2560,8 +2560,8 @@ Math.uuid = function (len, radix) {
      *
      *
      * * the origin tells you if it's a change pulled by sync(remote)
-     * or some user action within the app(window)
-     *
+     * or some user action within the app(window) or a result of connecting
+     * with the local data store(local).
      *
      *
      * * the oldValue defaults to undefined if you are dealing with some
@@ -3708,9 +3708,9 @@ Math.uuid = function (len, radix) {
    *       They have "oldValue" and "newValue" properties, which can be used to
    *       distinguish create/update/delete operations and analyze changes in
    *       change handlers. In addition they carry a "origin" property, which
-   *       is either "window" or "remote". "remote" events are fired whenever the
-   *       "incoming" flag is passed to #put() or #delete(). This is usually done
-   *       by RemoteStorage.Sync.
+   *       is either "window", "local", or "remote". "remote" events are fired
+   *       whenever the "incoming" flag is passed to #put() or #delete(). This
+   *       is usually done by RemoteStorage.Sync. 
    *
    *   The revision interface (also on RemoteStorage.IndexedDB object):
    *     - #setRevision(path, revision) sets the current revision for the given
@@ -3992,7 +3992,7 @@ Math.uuid = function (len, radix) {
           if (path.substr(-1) !== '/') {
             this._emit('change', {
               path: path,
-              origin: 'remote',
+              origin: 'local',
               oldValue: undefined,
               newValue: cursor.value.body
             });
