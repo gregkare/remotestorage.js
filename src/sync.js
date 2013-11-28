@@ -322,6 +322,7 @@
         (function (path) {
           RemoteStorage.Sync.sync(rs.remote, rs.local, path, rs.caching.get(path)).
             then(function() {
+              this.caching.set(path, {data: true, ready: true});
               if (aborted) { return; }
               i++;
               if (n === i) {
@@ -329,6 +330,7 @@
                 promise.fulfill();
               }
             }, function(error) {
+              this.caching.set(path, {data: true, ready: true});
               console.error('syncing', path, 'failed:', error);
               if (aborted) { return; }
               aborted = true;
