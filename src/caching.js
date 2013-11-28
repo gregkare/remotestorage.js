@@ -41,6 +41,8 @@
      *
      * Enable caching for the given path.
      *
+     * FIXME: document what `data` means here
+     *
      * Parameters:
      *   path - Absolute path to a directory.
      */
@@ -106,7 +108,20 @@
     cachePath: function(path) {
       this._validatePath(path);
       var settings = this._query(path);
+      //FIXME: document what `data` means here
       return settings && (isDir(path) || settings.data);
+    },
+
+    // Method: cachePathReady
+    //
+    // Checks if given path should be cached and is ready (i.e. sync has completed at least once).
+    //
+    // Returns: true or false
+    cachePath: function(path) {
+      this._validatePath(path);
+      var settings = this._query(path);
+      //FIXME: document what `data` means here
+      return ((typeof(settings) == 'object') && (settings.ready) && (isDir(path) || settings.data));
     },
 
     /**
