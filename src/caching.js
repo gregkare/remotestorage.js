@@ -44,7 +44,7 @@
      * Parameters:
      *   path - Absolute path to a directory.
      */
-    enable: function(path) { this.set(path, { data: true }); },
+    enable: function(path) { this.set(path, { data: true, ready: false }); },
     /**
      * Method: disable
      *
