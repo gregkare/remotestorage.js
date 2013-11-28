@@ -3222,7 +3222,7 @@ Math.uuid = function (len, radix) {
     // Checks if given path should be cached and is ready (i.e. sync has completed at least once).
     //
     // Returns: true or false
-    cachePath: function(path) {
+    cachePathReady: function(path) {
       this._validatePath(path);
       var settings = this._query(path);
       //FIXME: document what `data` means here
